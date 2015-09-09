@@ -1,0 +1,6 @@
+red-black insert pre-sorted with 'i'
+BST insert pre-sorted with 'I' (press shift)
+red-black insert random with 'r'
+BST insert random with 'R' (press shift)
+
+don't mix BST and red-black inserts, restart the program.
