@@ -487,7 +487,7 @@ function draw(coords)
 
             ad = 0.5/width
 
-            treeline = compose(context(), line([(x+ad, y+ad), (xp+ad, yp+ad)]), stroke("black"), width(1em) )
+            treeline = compose(context(), line([(x+ad, y+ad), (xp+ad, yp+ad)]), stroke("black") )
             push!(lines, treeline)
         end
 
