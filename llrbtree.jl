@@ -147,13 +147,13 @@ function add_node{K,V}(node::TreePart, key::K, value::V)
     end
 
     if node.key < key
-         print("went right")
+        #print("went right")
         node.right = add_node(node.right, key, value)
     elseif node.key > key
-        print("went left")
+        #print("went left")
         node.left = add_node(node.left, key, value)
     else
-        print("stayed")
+        #print("stayed")
         node.value = value
         return node
     end
