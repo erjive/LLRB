@@ -496,9 +496,9 @@ module LLRBVisualize
             end
 
             #Build the circle
-            color = coords[i][5] ? "red" : "black"
+            coloring = coords[i][5] ? "red" : "black"
             value = coords[i][4]
-            circle_ = treecircle(x, y, 1/width, string(value), color )
+            circle_ = treecircle(x, y, 1/width, string(value), coloring )
             push!(circles, circle_)
         end
 
@@ -507,8 +507,8 @@ module LLRBVisualize
     drawtree(col::ColumnFull) = drawtree(getcoords(col))
     drawtree(tree::LLRBTree) = drawtree(buildcolumns(tree))
 
-    function treecircle(x::Float64, y::Float64, side::Float64, value::String, color::String)
-        compose(context(x, y, side, side), circle(), fill(color), (context(0,0), text(0.2,0.65,value), fill("white")))
+    function treecircle(x::Float64, y::Float64, side::Float64, value::String, coloring::String)
+        compose(context(x, y, side, side), circle(), fill(coloring), (context(0,0), text(0.2,0.65,value), fill("white")))
     end
 
     #Stange triangle visualization
