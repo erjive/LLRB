@@ -1,4 +1,4 @@
 # LLRB
 LLRB Tree data structure
 
-Translated from Robert Sedgewicks orignal
+Translated from Robert Sedgewicks original
