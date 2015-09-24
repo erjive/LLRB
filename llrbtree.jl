@@ -2,9 +2,6 @@
 #Translated from code by Robert Sedgewick
 module LLRBTrees
 
-# Are we debugging?
-global isDebug = false
-
 import Base: haskey, getindex, setindex!, delete!, minimum, push!
 
 export TreePart, TreeLeaf, TreeNode, LLRBTree, getnodefrom_key, setdebug, getmaxdepth, orderedpairs
@@ -308,7 +305,7 @@ end
 getmaxdepth(tree::LLRBTree) = getmaxdepth(tree.root)
 
 #Return an ordered list with recursion
-function inorder(node::TreePart, list={})
+function inorder(node::TreePart, list=Any[])
     if !isa(node, TreeLeaf)
 
         if !isa(node.left, TreeLeaf)
@@ -333,6 +330,7 @@ module LLRBVisualize
 
     using LLRBTrees
     using Compose
+    using Colors
 
     export iterate_undernode, drawASCII, drawtree
 
@@ -455,7 +453,7 @@ module LLRBVisualize
         #Define the cell dimensions in relative coordinates
         width=1/length
         height=1/maxheight
-        coords = {}
+        coords = Any[]
 
         #Write to the array from left to right
         x = -width
@@ -463,7 +461,7 @@ module LLRBVisualize
             y = -height/2 + col.height*height
             x += width
             parentid = isa(col.parent, ColumnFull) ? columnindex(col.parent): 0
-            push!( coords, { x, y, parentid, col.node.value, col.node.isRed } )
+            push!( coords, Any[ x, y, parentid, col.node.value, col.node.isRed ] )
 
             col = col.right
             isa(col, ColumnEmpty) && break
@@ -474,8 +472,8 @@ module LLRBVisualize
 
     #Vector graphic representation with Compose.jl
     function drawtree(coords)
-        circles = {}
-        lines = {}
+        circles = Any[]
+        lines = Any[]
         width = length(coords)
         #Make a list of all the circles to be drawn
         for i in 1:width
@@ -491,24 +489,24 @@ module LLRBVisualize
 
                 ad = 0.5/width
 
-                treeline = compose(context(), line([(x+ad, y+ad), (xp+ad, yp+ad)]), stroke("black") )
+                treeline = compose(context(), line([(x+ad, y+ad), (xp+ad, yp+ad)]), stroke(colorant"black") )
                 push!(lines, treeline)
             end
 
             #Build the circle
-            coloring = coords[i][5] ? "red" : "black"
+            coloring = coords[i][5] ? colorant"red" : colorant"black"
             value = coords[i][4]
             circle_ = treecircle(x, y, 1/width, string(value), coloring )
             push!(circles, circle_)
         end
 
-        compose(context(), circles..., lines..., stroke("white"), fontsize(1/width*50), linewidth(0.1mm))
+        compose(context(), circles..., lines..., stroke(colorant"white"), fontsize(1/width*50), linewidth(0.1mm))
     end
     drawtree(col::ColumnFull) = drawtree(getcoords(col))
     drawtree(tree::LLRBTree) = drawtree(buildcolumns(tree))
 
-    function treecircle(x::Float64, y::Float64, side::Float64, value::String, coloring::String)
-        compose(context(x, y, side, side), circle(), fill(coloring), (context(0,0), text(0.2,0.65,value), fill("white")))
+    function treecircle(x::Float64, y::Float64, side::Float64, value::String, coloring )
+        compose(context(x, y, side, side), circle(), fill(coloring), (context(0,0), text(0.2,0.65,value), fill(colorant"white")))
     end
 
     #Stange triangle visualization
@@ -535,4 +533,3 @@ end
 
 
 end
-
