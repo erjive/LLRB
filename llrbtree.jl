@@ -137,32 +137,28 @@ function add_node{K,V}(node::TreePart, key::K, value::V)
         return TreeNode(key, value)
     end
 
-    if node.left.isRed && node.right.isRed
-         #("Split node with two red children")
-        flipcolor!(node)
-         #(node)
-    end
-
     if node.key < key
-        #print("went right")
         node.right = add_node(node.right, key, value)
     elseif node.key > key
-        #print("went left")
         node.left = add_node(node.left, key, value)
     else
-        #print("stayed")
         node.value = value
-        return node
+        #return node      #If we uncomment this, there won't be an unneccesary
+                          # rotation in the last subtrees, but the conversion to
+                          # 2-3 trees won't be as easy
     end
 
     if node.right.isRed
          #("Rotate left to prevent red node on right")
         node=rotateleft(node)
-         #(node)
     end
     if node.left.isRed && node.left.left.isRed
          #("Rotate right to prevent consecutive red nodes")
         node=rotateright(node)
+    end
+    if node.left.isRed && node.right.isRed
+         #("Split node with two red children")
+        flipcolor!(node)
          #(node)
     end
 
