@@ -1,6 +1,5 @@
 #The LLRBTree data structure, that allows us to acces keys in log2 time.
 #Translated from code by Robert Sedgewick
-#Author: Ernesto Paas
 module LLRBTrees
 
 import Base: haskey, getindex, setindex!, delete!, minimum, push!
