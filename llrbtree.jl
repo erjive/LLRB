@@ -171,15 +171,15 @@ push!{K,V}(tree::LLRBTree, node::TreeNode{K,V}) = (tree.root = add_node(tree.roo
 # Move the red node left
 function moveredleft{K,V}(node::TreeNode{K,V})
     flipcolor!(node)
-    if (node.right.left.isRed==true)
+    if (node.right.left.isRed)
         node.right = rotateright(node.right)
         node = rotateleft(node)
-        flipcolor!(node)
+        #flipcolor!(node)
 
         #Avoid creating right-leaning nodes
-        if (node.right.right.isRed)
-            node.right = rotateleft(node.right)
-        end
+        # if (node.right.right.isRed)
+        #     node.right = rotateleft(node.right)
+        # end
     end
     return node
 end
@@ -189,7 +189,7 @@ function moveredright{K,V}(node::TreeNode{K,V})
     flipcolor!(node)
     if (node.left.left.isRed==true)
         node= rotateright(node)
-        flipcolor!(node)
+        #flipcolor!(node)
     end
     return node
 end
@@ -209,7 +209,7 @@ function fixup{K,V}(node::TreeNode{K,V})
     if (node.right.isRed)
         node=rotateleft(node)
     end
-    if (isa(node.left,TreeLeaf) && node.left.isRed && node.left.left.isRed)
+    if (!isa(node.left,TreeLeaf) && node.left.isRed && node.left.left.isRed)
         node=rotateright(node)
     end
     if (node.left.isRed && node.right.isRed)
@@ -236,7 +236,7 @@ function delete_node{K,V}(node::TreeNode{K,V}, key::K)
         if !isa(node.left, TreeLeaf)
             #("* Continue search if left is present")
             if (!node.left.isRed && !node.left.left.isRed)
-                node=moveredright(node)
+                node=moveredleft(node)
             end
             #("Remove from left recursion")
             node.left=delete_node(node.left, key)
