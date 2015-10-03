@@ -209,7 +209,7 @@ function fixup{K,V}(node::TreeNode{K,V})
     if (node.right.isRed)
         node=rotateleft(node)
     end
-    if (isa(node.left,TreeLeaf) && node.left.isRed && h.left.left.isRed)
+    if (isa(node.left,TreeLeaf) && node.left.isRed && node.left.left.isRed)
         node=rotateright(node)
     end
     if (node.left.isRed && node.right.isRed)
@@ -220,11 +220,9 @@ end
 
 function deletemin{K,V}(node::TreeNode{K,V})
     if isa(node.left, TreeLeaf)
-        # Nothing to do
         return TreeLeaf()
     end
     if !node.left.isRed && !node.left.left.isRed
-        # Move red node left
         node=moveredleft(node)
     end
     # Recursively delete
@@ -234,12 +232,10 @@ end
 
 
 function delete_node{K,V}(node::TreeNode{K,V}, key::K)
-    #("Entering node")
     if key<node.key
         if !isa(node.left, TreeLeaf)
             #("* Continue search if left is present")
             if (!node.left.isRed && !node.left.left.isRed)
-                #("Move a red node over")
                 node=moveredright(node)
             end
             #("Remove from left recursion")
@@ -260,7 +256,6 @@ function delete_node{K,V}(node::TreeNode{K,V}, key::K)
         if !isa(node.right, TreeLeaf)
             #("* Continue search if right is present")
             if (!node.right.isRed && !node.right.left.isRed)
-                #("Move a red node over")
                 node=moveredright(node)
             end
             if key==node.key
@@ -270,7 +265,6 @@ function delete_node{K,V}(node::TreeNode{K,V}, key::K)
                 node.value=min.value
                 node.right=deletemin(node.right)
             else
-                  #("Remove from right recursion")
                 node.right=delete_node(node.right,key)
             end
         else
