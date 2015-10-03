@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version="1.2"
+     width="100mm" height="100mm" viewBox="0 0 100 100"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<g stroke-width="0.1" font-size="16.67" stroke="#FFFFFF" id="fig-53599ae5eee648688f96b4f56891b2e2-element-1">
+  <g stroke="#000000" id="fig-53599ae5eee648688f96b4f56891b2e2-element-2">
+    <path fill="none" d="M83.33,91.67 L 50 41.67"/>
+  </g>
+  <g stroke="#000000" id="fig-53599ae5eee648688f96b4f56891b2e2-element-3">
+    <path fill="none" d="M16.67,91.67 L 50 41.67"/>
+  </g>
+  <g fill="#000000" id="fig-53599ae5eee648688f96b4f56891b2e2-element-4">
+    <circle cx="83.33" cy="91.67" r="16.67"/>
+    <g fill="#FFFFFF" id="fig-53599ae5eee648688f96b4f56891b2e2-element-5">
+      <text x="73.33" y="96.67">200</text>
+    </g>
+  </g>
+  <g fill="#000000" id="fig-53599ae5eee648688f96b4f56891b2e2-element-6">
+    <circle cx="50" cy="41.67" r="16.67"/>
+    <g fill="#FFFFFF" id="fig-53599ae5eee648688f96b4f56891b2e2-element-7">
+      <text x="40" y="46.67">126</text>
+    </g>
+  </g>
+  <g fill="#000000" id="fig-53599ae5eee648688f96b4f56891b2e2-element-8">
+    <circle cx="16.67" cy="91.67" r="16.67"/>
+    <g fill="#FFFFFF" id="fig-53599ae5eee648688f96b4f56891b2e2-element-9">
+      <text x="6.67" y="96.67">64</text>
+    </g>
+  </g>
+</g>
+</svg>
