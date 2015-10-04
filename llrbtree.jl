@@ -58,7 +58,7 @@ module LLRBTrees
   end
   getnodefrom_key(tree::LLRBTree, key) = getnodefrom_key(tree.root, key)
 
-  haskey(tree::LLRBTree, key) = isa(getnodefrom_key(tree, key), TreeLeaf) ? false : true
+  haskey(tree::LLRBTree, key) = isa(getnodefrom_key(tree.root, key), TreeLeaf) ? false : true
   haskey(node::TreeNode, key) = isa(getnodefrom_key(node, key), TreeLeaf) ? false : true
 
   # A getindex only that the indexes are keys and we get the value of the first node with the given key
