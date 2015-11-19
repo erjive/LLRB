@@ -242,14 +242,16 @@ module LLRBTrees
               end
               node.left=delete_node(node.left, key)
           else
-              throw(KeyError(key))
+              Base.warn_once("Key not found:", key)
+              return fixup(node)
           end
       else
           if (node.left.isRed)
               #("Flip a 3 node or unbalance a 4 node")
               node=rotateright(node)
-          end
-          if key==node.key && isa(node.right,TreeLeaf)
+         end
+
+          if (key==node.key && isa(node.right,TreeLeaf))
               return TreeLeaf()
           end
           if !isa(node.right, TreeLeaf)
@@ -266,7 +268,8 @@ module LLRBTrees
                   node.right=delete_node(node.right,key)
               end
           else
-              throw(KeyError(key))
+              Base.warn_once("Key not found:", key)
+              return fixup(node)
           end
       end
       return fixup(node)
